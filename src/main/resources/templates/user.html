@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<a href="/users">&lt;- All users</a>
+<h3 th:text="${user.name}"></h3>
+<form action="/posts/add" method="post">
+    Message:<br/>
+    <input type="text" name="message"/>
+    <input type="hidden" name="userId" th:value="${user.userId}"/>
+</form>
+<i>Press enter to add</i>
+<br/>
+<h4>Posts</h4>
+<th:block th:each="post : ${user.posts}">
+    <h7>
+        <a th:href="'/post/' + ${post.postId}" th:text="${post.message}"></a>
+    </h7><br/>
+</th:block>
+<h4>Subscribers</h4>
+<th:block th:each="subscriber : ${user.subscribersOf}">
+    <h7>
+        <a th:href="'/users/' + ${subscriber.userId}" th:text="${subscriber.name}"></a>
+    </h7><br/>
+</th:block>
+<th:block th:each="subscriber : ${user.subscribersTo}">
+    <h7>
+        <a th:href="'/users/' + ${subscriber.userId}" th:text="${subscriber.name}"></a>
+    </h7><br/>
+</th:block>
+<br/>
+<br/>
+<form th:action="'/users/' + ${user.userId} + '/delete'" method="post">
+    <input type="submit" value="Delete"  >
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form action="/users/add" method="post">
+    First name:<br/>
+    <input type="text" name="name"/>
+</form>
+<i>Press enter to add</i>
+<br/>
+<br/>
+<th:block th:each="user : ${users}">
+    <h7>
+        <a th:href="'/users/' + ${user.userId}" th:text="${user.name}"></a>
+    </h7><br/>
+</th:block>
+</body>
+</html>
